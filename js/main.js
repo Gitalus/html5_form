@@ -10,18 +10,24 @@ window.onload = function() {
         selectStates.appendChild(option);
     });
 
+
+
+
+
+
     // Event Listeners
 
     form.addEventListener('submit', checkValid);
 }
+
 // Functions
-// function createAlert() {
-//     const alertCard = document.createElement('div');
-//     const textAlert = document.createTextNode("*required");
-//     alertCard.appendChild(textAlert);
-//     alertCard.classList.add("alert-input");
-//     return alertCard;
-// }
+function createAlert() {
+    const alertCard = document.createElement('div');
+    const textAlert = document.createTextNode("*required, please check format");
+    alertCard.appendChild(textAlert);
+    alertCard.classList.add("alert-input");
+    return alertCard;
+}
 
 function checkValid (event) {
     event.preventDefault();
@@ -29,25 +35,56 @@ function checkValid (event) {
     const formElements = event.target.elements;
 
 
-    // const creditRex = /^(\d{4}).?(\d{4}).?(\d{4}).?(\d{4})$/;
-    // const cvcRex = /^\d{3}$/;
-    // const amountRex = /^\d+$/;
-    // const fTextRex = /^[a-zA-Z]+$/i;
-    // const postalRex = /\d{5,10}/;
+    const creditRex = /^(\d{4}).?(\d{4}).?(\d{4}).?(\d{4})$/;
+    const cvcRex = /^\d{3}$/;
+    const amountRex = /^\d+$/;
+    const fTextRex = /^[a-zA-Z]+$/i;
+    const postalRex = /\d{5,10}/;
 
-    for (const element of formElements) {
-        if (element.type == "submit" || element.type == "button") {
-            continue;
-        }
-        if (element.value == false) {
 
-            element.style.transition = "all .3s ease";
-            element.style.background = "rgb(255 0 0 / 40%)";
-        }
-        else {
-            element.style.transition = "all .3s ease";
-            element.style.background = "rgb(255 255 255)";
-        }
+    if (!creditRex.exec(formElements["credit-card"].value)) {
+        formElements["credit-card"].style.background = 'rgb(255 0 0 / 50%)';
+        formElements["credit-card"].style.transition = "all 0.3s ease";
+    }
+    
+    if (!cvcRex.exec(formElements["cvc-card"].value)) {
+        
+        formElements["cvc-card"].style.background = 'rgb(255 0 0 / 50%)';
+        formElements["cvc-card"].style.transition = "all 0.3s ease";
+    }
+    
+    if (!amountRex.exec(formElements["amount"].value)) {
+        formElements["amount"].style.background = 'rgb(255 0 0 / 50%)';
+        formElements["amount"].style.transition = "all 0.3s ease";
+    }
+    
+    if (!fTextRex.exec(formElements["firstName"].value)) {
+        formElements["firstName"].style.background = 'rgb(255 0 0 / 50%)';
+        formElements["firstName"].style.transition = "all 0.3s ease";
+    }
+    
+    if (!fTextRex.exec(formElements["lastName"].value)) {
+        formElements["lastName"].style.background = 'rgb(255 0 0 / 50%)';
+        formElements["lastName"].style.transition = "all 0.3s ease";
+    }
+    
+    if(!fTextRex.exec(formElements["inputCity"].value)) {
+        formElements["inputCity"].style.background = 'rgb(255 0 0 / 50%)';
+        formElements["inputCity"].style.transition = "all 0.3s ease";
     }
 
+    if (!postalRex.exec(formElements["postalCode"].value)) {
+        formElements["postalCode"].style.background = 'rgb(255 0 0 / 50%)';
+        formElements["postalCode"].style.transition = "all 0.3s ease";
+    }
+    
+    if (!formElements["radio-stacked"].value) {
+        document.querySelector(".radios-group").style.background = 'rgb(255 0 0 / 50%)';
+        document.querySelector(".radios-group").style.transition = "all 0.3s ease";
+    }
+    
+    if (!formElements["inputState"].value) {
+        formElements["inputState"].style.background = 'rgb(255 0 0 / 50%)';
+        formElements["inputState"].style.transition = "all 0.3s ease";
+    }
 }
