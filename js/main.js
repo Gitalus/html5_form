@@ -73,6 +73,4 @@ window.onload = function() {
             element.classList.remove('alert-style')
         }
     }
-    
-    
 }

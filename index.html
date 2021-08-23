@@ -28,41 +28,46 @@
                         </div>
                         <div class="col-12 col-lg-5">
                             <label for="credit-card" class="form-label">Card #</label>
-                            <input type="number" class="form-control" id="credit-card"
-                                placeholder="0000-0000-0000-0000">
+                            <input type="text" class="form-control" id="credit-card" placeholder="0000-0000-0000-0000"
+                                pattern="^(\d{4}).?(\d{4}).?(\d{4}).?(\d{4})$" title="xxxx-xxxx-xxxx-xxxx">
                         </div>
                         <div class="col-lg-3 col-6">
                             <label for="cvc-card" class="form-label">CVC #</label>
-                            <input type="number" class="form-control" id="cvc-card" placeholder="000">
+                            <input type="text" class="form-control" id="cvc-card" placeholder="000" pattern="^\d{3}$"
+                                title="CVC must contain 3 digits">
                         </div>
                         <div class="col-lg-4 col-6">
                             <label for="amount-money" class="form-label">Amount</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1">$</span>
-                                <input type="number" class="form-control" placeholder="Amount" id="amount">
+                                <input type="text" class="form-control" placeholder="Amount" id="amount"
+                                    pattern="^[1-9][0-9]*$" title="The amount must be greater than 0">
                             </div>
                         </div>
                         <div class="col-lg-6 col-12">
                             <label for="firstName" class="form-label">First Name</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="First Name">
+                            <input type="text" class="form-control" id="firstName" placeholder="First Name"
+                                pattern="^[a-zA-Z]*$" title="Your name can't include numbers or special symbols">
                         </div>
                         <div class="col-lg-6 col-12">
                             <label for="lastName" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" id="lastName" placeholder="Last Name">
+                            <input type="text" class="form-control" id="lastName" placeholder="Last Name"
+                                pattern="^[a-zA-Z]*$" title="Your last name can't include numbers or special symbols">
                         </div>
                         <div class="col-md-6">
                             <label for="inputCity" class="form-label">City</label>
-                            <input type="text" class="form-control" id="inputCity">
+                            <input type="text" class="form-control" id="inputCity" pattern="^\w*$"
+                                title="Cities can't have special symbols">
                         </div>
                         <div class="col-md-3">
                             <label for="inputState" class="form-label">State</label>
                             <select id="inputState" class="form-select">
-                                <option value="">Pick a state</option>
+                                <option selected disabled value="">Pick a state</option>
                             </select>
                         </div>
                         <div class="col-md-3">
                             <label for="postalCode" class="form-label">Postal Code</label>
-                            <input type="number" class="form-control" id="postalCode">
+                            <input type="text" class="form-control" id="postalCode" pattern="^\d{5,10}$">
                         </div>
                         <!-- radios -->
                         <div class="col-md-6">
