@@ -37,7 +37,6 @@ window.onload = function() {
         const ready = redIfEmpty(formElements);
         if (ready) {
             form.submit();
-            alertContainer.hidden = true;
         }
     }
     
@@ -61,6 +60,11 @@ window.onload = function() {
         }
         return ready;
     }
+
+    function showAlert() {
+        alertContainer.hidden = false;
+    }
+    
     function cleanFields() {
         form.reset();
         alertContainer.hidden = true;
@@ -70,8 +74,5 @@ window.onload = function() {
         }
     }
     
-    function showAlert() {
-        alertContainer.hidden = false;
-    }
     
 }
