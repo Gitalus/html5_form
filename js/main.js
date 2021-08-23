@@ -16,8 +16,14 @@ window.onload = function() {
     });
 
     // Event Listeners
-
-
+    for (const element of formElements) {
+        element.addEventListener('change', (event) => {
+            event.target.classList.remove('alert-style');
+        });
+    }
+    radiosbtn.addEventListener('change', event => {
+        radiosbtn.classList.remove('radios-group-alert');
+    })
     cancelbtn.addEventListener('click', cleanFields);
     form.addEventListener('submit', checkValid);
     selectStates.addEventListener('change', (event) => {
@@ -48,19 +54,16 @@ window.onload = function() {
             }
         }
     }
-    function cleanFields(event) {
-
+    function cleanFields() {
+        form.reset();
         alertContainer.hidden = true;
+        radiosbtn.classList.remove('radios-group-alert');
         for (const element of formElements) {
-            if (element.type != 'button' && element.type != 'submit') {
-                element.classList.remove('alert-style');
-            }
+            element.classList.remove('alert-style')
         }
-        
     }
     
     function showAlert() {
-        const alertContainer = document.querySelector('.alert-container');
         alertContainer.style.transition = 'all 0.3s ease';
         alertContainer.hidden = false;
     }
