@@ -1,7 +1,12 @@
 .icons-credit {
     font-size: 1.3em;
 }
-.alert-input {
+/* .alert-input {
     color: red;
-    font-size: 15px;
+    font-size: 12px;
+} */
+
+.alert-style {
+    transition: all 0.3s ease;
+    background-color: rgb(255 0 0 / 15%);
 }

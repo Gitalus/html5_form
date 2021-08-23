@@ -3,6 +3,9 @@ const states = ['Alabama','Alaska','American Samoa','Arizona','Arkansas','Califo
 window.onload = function() {
     const form = document.querySelector('form');
     const selectStates = document.querySelector('select');
+    const cancelbtn =  document.getElementById('cancel-btn');
+
+
     states.forEach(estado => {
         const option = document.createElement('option');
         option.value = estado;
@@ -10,81 +13,49 @@ window.onload = function() {
         selectStates.appendChild(option);
     });
 
-
-
-
-
-
     // Event Listeners
 
+
+    cancelbtn.addEventListener('click', cleanFields);
     form.addEventListener('submit', checkValid);
+    selectStates.addEventListener('change', (event) => {
+        event.target.classList.remove('alert-style');
+    });
 }
 
 // Functions
-function createAlert() {
-    const alertCard = document.createElement('div');
-    const textAlert = document.createTextNode("*required, please check format");
-    alertCard.appendChild(textAlert);
-    alertCard.classList.add("alert-input");
-    return alertCard;
-}
-
 function checkValid (event) {
     event.preventDefault();
     const form = event.target;
     const formElements = event.target.elements;
+    redIfEmpty(formElements);
+}
 
-
-    const creditRex = /^(\d{4}).?(\d{4}).?(\d{4}).?(\d{4})$/;
-    const cvcRex = /^\d{3}$/;
-    const amountRex = /^\d+$/;
-    const fTextRex = /^[a-zA-Z]+$/i;
-    const postalRex = /\d{5,10}/;
-
-
-    if (!creditRex.exec(formElements["credit-card"].value)) {
-        formElements["credit-card"].style.background = 'rgb(255 0 0 / 50%)';
-        formElements["credit-card"].style.transition = "all 0.3s ease";
+function redIfEmpty(elements) {
+    for (const element of elements) {
+        if (!element.value && element.type != 'button' && element.type != 'submit') {
+            console.log(element);
+            element.classList.add('alert-style');
+            showAlert()
+        } else {
+            element.classList.remove('alert-style')
+        }
     }
-    
-    if (!cvcRex.exec(formElements["cvc-card"].value)) {
-        
-        formElements["cvc-card"].style.background = 'rgb(255 0 0 / 50%)';
-        formElements["cvc-card"].style.transition = "all 0.3s ease";
-    }
-    
-    if (!amountRex.exec(formElements["amount"].value)) {
-        formElements["amount"].style.background = 'rgb(255 0 0 / 50%)';
-        formElements["amount"].style.transition = "all 0.3s ease";
-    }
-    
-    if (!fTextRex.exec(formElements["firstName"].value)) {
-        formElements["firstName"].style.background = 'rgb(255 0 0 / 50%)';
-        formElements["firstName"].style.transition = "all 0.3s ease";
-    }
-    
-    if (!fTextRex.exec(formElements["lastName"].value)) {
-        formElements["lastName"].style.background = 'rgb(255 0 0 / 50%)';
-        formElements["lastName"].style.transition = "all 0.3s ease";
-    }
-    
-    if(!fTextRex.exec(formElements["inputCity"].value)) {
-        formElements["inputCity"].style.background = 'rgb(255 0 0 / 50%)';
-        formElements["inputCity"].style.transition = "all 0.3s ease";
+}
+function cleanFields(event) {
+    const formElements = event.target.parentNode.parentNode.elements;
+    const alertContainer = document.querySelector('.alert-container');
+    alertContainer.hidden = true;
+    for (const element of formElements) {
+        if (element.type != 'button' && element.type != 'submit') {
+            element.classList.remove('alert-style');
+        }
     }
 
-    if (!postalRex.exec(formElements["postalCode"].value)) {
-        formElements["postalCode"].style.background = 'rgb(255 0 0 / 50%)';
-        formElements["postalCode"].style.transition = "all 0.3s ease";
-    }
-    
-    if (!formElements["radio-stacked"].value) {
-        document.querySelector(".radios-group").style.background = 'rgb(255 0 0 / 50%)';
-        document.querySelector(".radios-group").style.transition = "all 0.3s ease";
-    }
-    
-    if (!formElements["inputState"].value) {
-        formElements["inputState"].style.background = 'rgb(255 0 0 / 50%)';
-        formElements["inputState"].style.transition = "all 0.3s ease";
-    }
+}
+
+function showAlert() {
+    const alertContainer = document.querySelector('.alert-container');
+    alertContainer.style.transition = 'all 0.3s ease';
+    alertContainer.hidden = false;
 }
