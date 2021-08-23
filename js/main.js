@@ -34,14 +34,19 @@ window.onload = function() {
     function checkValid (event) {
         event.preventDefault();
 
-        redIfEmpty(formElements);
-
+        const ready = redIfEmpty(formElements);
+        if (ready) {
+            form.submit();
+            alertContainer.hidden = true;
+        }
     }
     
     function redIfEmpty(elements) {
+        let ready = true;
         if (!elements["radio-stacked"].value) {
             radiosbtn.classList.add('radios-group-alert');
             showAlert();
+            ready = false;
         } else if (elements["radio-stacked"].value){
             radiosbtn.classList.remove('radios-group-alert');
         }
@@ -49,10 +54,12 @@ window.onload = function() {
             if (!element.value && element.type != 'button' && element.type != 'submit') {
                 element.classList.add('alert-style');
                 showAlert()
+                ready = false;
             } else {
                 element.classList.remove('alert-style')
             }
         }
+        return ready;
     }
     function cleanFields() {
         form.reset();
@@ -64,7 +71,6 @@ window.onload = function() {
     }
     
     function showAlert() {
-        alertContainer.style.transition = 'all 0.3s ease';
         alertContainer.hidden = false;
     }
     
