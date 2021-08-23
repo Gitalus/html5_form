@@ -4,7 +4,9 @@ window.onload = function() {
     const form = document.querySelector('form');
     const selectStates = document.querySelector('select');
     const cancelbtn =  document.getElementById('cancel-btn');
-
+    const radiosbtn = document.querySelector('.radios-group');
+    const alertContainer = document.querySelector('.alert-container');
+    const formElements = form.elements;
 
     states.forEach(estado => {
         const option = document.createElement('option');
@@ -21,41 +23,46 @@ window.onload = function() {
     selectStates.addEventListener('change', (event) => {
         event.target.classList.remove('alert-style');
     });
-}
+    
+    // Functions
+    function checkValid (event) {
+        event.preventDefault();
 
-// Functions
-function checkValid (event) {
-    event.preventDefault();
-    const form = event.target;
-    const formElements = event.target.elements;
-    redIfEmpty(formElements);
-}
+        redIfEmpty(formElements);
 
-function redIfEmpty(elements) {
-    for (const element of elements) {
-        if (!element.value && element.type != 'button' && element.type != 'submit') {
-            console.log(element);
-            element.classList.add('alert-style');
-            showAlert()
-        } else {
-            element.classList.remove('alert-style')
+    }
+    
+    function redIfEmpty(elements) {
+        if (!elements["radio-stacked"].value) {
+            radiosbtn.classList.add('radios-group-alert');
+            showAlert();
+        } else if (elements["radio-stacked"].value){
+            radiosbtn.classList.remove('radios-group-alert');
+        }
+        for (const element of elements) {
+            if (!element.value && element.type != 'button' && element.type != 'submit') {
+                element.classList.add('alert-style');
+                showAlert()
+            } else {
+                element.classList.remove('alert-style')
+            }
         }
     }
-}
-function cleanFields(event) {
-    const formElements = event.target.parentNode.parentNode.elements;
-    const alertContainer = document.querySelector('.alert-container');
-    alertContainer.hidden = true;
-    for (const element of formElements) {
-        if (element.type != 'button' && element.type != 'submit') {
-            element.classList.remove('alert-style');
+    function cleanFields(event) {
+
+        alertContainer.hidden = true;
+        for (const element of formElements) {
+            if (element.type != 'button' && element.type != 'submit') {
+                element.classList.remove('alert-style');
+            }
         }
+        
     }
-
-}
-
-function showAlert() {
-    const alertContainer = document.querySelector('.alert-container');
-    alertContainer.style.transition = 'all 0.3s ease';
-    alertContainer.hidden = false;
+    
+    function showAlert() {
+        const alertContainer = document.querySelector('.alert-container');
+        alertContainer.style.transition = 'all 0.3s ease';
+        alertContainer.hidden = false;
+    }
+    
 }

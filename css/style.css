@@ -5,8 +5,22 @@
     color: red;
     font-size: 12px;
 } */
-
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 .alert-style {
     transition: all 0.3s ease;
     background-color: rgb(255 0 0 / 15%);
+}
+
+.radios-group {
+    background: grey;
+    color: white;
+    transition: all 0.3s ease;
+}
+.radios-group-alert {
+    background: rgb(255 0 0 / 15%);
+    color: grey;
 }
